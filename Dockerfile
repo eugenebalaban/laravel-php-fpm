@@ -6,6 +6,7 @@ RUN set -xe \
 		libxml2-dev \
 		libintl \
 		gettext-dev \
+		openldap-dev \
 
 	# Install composer and prestissimo
 	&& curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
@@ -15,6 +16,7 @@ RUN set -xe \
     && docker-php-ext-install bcmath \
         calendar fileinfo iconv json mbstring \
         gettext mcrypt pcntl pdo pdo_mysql soap \
-        tokenizer zip
+        tokenizer zip ldap \
+    && rm -rf /var/cache/apk/*
 
 COPY . /var/www/html
