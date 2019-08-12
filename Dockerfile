@@ -26,3 +26,5 @@ RUN set -xe \
 	&& rm -rf /var/cache/apk/*
 
 COPY . /var/www/html
+
+COPY .docker/www.conf /usr/local/etc/php-fpm.d/
