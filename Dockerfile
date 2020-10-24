@@ -20,13 +20,12 @@ RUN set -xe \
 
 	# Install composer and prestissimo
 	&& curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-	&& composer global require "hirak/prestissimo:^0.3" \
 
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg \
 
 	&& chmod uga+x /usr/local/bin/install-php-extensions \
 	&& sync \
-    && install-php-extensions bcmath \
+    && install-php-extensions bcmath memcached apcu \
         calendar fileinfo iconv json mbstring \
         gettext mcrypt pcntl pdo pdo_mysql soap \
         tokenizer zip ldap gd intl xdebug \
