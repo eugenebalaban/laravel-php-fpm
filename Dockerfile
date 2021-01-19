@@ -1,6 +1,6 @@
-FROM php:7.4-fpm-alpine
+FROM php:8.0-fpm-alpine
 
-ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 ADD entrypoint.sh /entrypoint.sh
 
 RUN set -xe \
@@ -18,14 +18,9 @@ RUN set -xe \
 		bash \
 		openssh \
 
-	# Install composer and prestissimo
-	&& curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-
-	&& docker-php-ext-configure gd --with-freetype --with-jpeg \
-
 	&& chmod uga+x /usr/local/bin/install-php-extensions \
 	&& sync \
-    && install-php-extensions bcmath memcached apcu \
+    && install-php-extensions @composer bcmath memcached apcu \
         calendar fileinfo iconv json mbstring \
         gettext mcrypt pcntl pdo pdo_mysql soap \
         tokenizer zip ldap gd intl xdebug \
