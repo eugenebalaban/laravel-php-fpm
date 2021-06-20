@@ -23,7 +23,7 @@ RUN set -xe \
     && install-php-extensions @composer bcmath memcached apcu \
         calendar fileinfo iconv json mbstring \
         gettext mcrypt pcntl pdo pdo_mysql soap \
-        tokenizer zip ldap gd intl xdebug \
+        tokenizer zip ldap gd intl xdebug exif \
 
 	&& rm -rf /var/cache/apk/* \
 	&& apk del pcre-dev ${PHPIZE_DEPS} \
